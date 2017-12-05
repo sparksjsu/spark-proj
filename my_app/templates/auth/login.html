@@ -1,0 +1,24 @@
+<!-- app/templates/auth/login.html -->
+
+{% import "bootstrap/utils.html" as utils %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block body %}
+<div class="content-section">
+  <br/>
+  {{ utils.flashed_messages() }}
+  <br/>
+  <div class="center">
+    <form
+        method="POST"
+        action="{{ url_for('auth.login') }}"
+        role="form">
+      {{ form.csrf_token }}
+      <div class="form-group">{{ form.username.label }}: {{ form.username() }}</div>
+      <div class="form-group">{{ form.password.label }}: {{ form.password() }}</div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
