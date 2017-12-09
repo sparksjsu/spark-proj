@@ -19,7 +19,13 @@
                   <th width="15%"> Customer Number</th>
                   <th width="30%"> Customer Name</th>
                   <th width="30%"> Contact Name</th>
+                  <th width="30%"> Phone</th>
                   <th width="30%"> Sales Rep. Emp Num.</th>
+                  <th width="30%"> Customer Address</th>
+                  <th width="30%"> City</th>
+                  <th width="30%"> State</th>
+                  <th width="30%"> PostalCode</th>
+                  <th width="30%"> Country</th>
                 </tr>
               </thead>
               <tbody>
@@ -28,7 +34,13 @@
 		  <td> {{ customer.customerNumber}} </td>
 		  <td> {{ customer.customerName}} </td>
 		  <td> {{ customer.contactFirstName}} {{ customer.contactLastName }} </td>
+		  <td> {{ customer.phone}} </td>
 		  <td> {{ customer.salesRepEmployeeNumber}} </td>
+		  <td> {{ customer.addressLine1}} {{ customer.addressLine2}} </td>
+		  <td> {{ customer.city}} </td>
+		  <td> {{ customer.state}} </td>
+		  <td> {{ customer.postalCode}} </td>
+		  <td> {{ customer.country}} </td>
 		</tr>
               {% endfor %}
               </tbody>

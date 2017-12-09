@@ -19,6 +19,11 @@
                   <th width="15%"> Emp Num</th>
                   <th width="30%"> Name</th>
                   <th width="30%"> Email</th>
+                  <th width="30%"> Job Title</th>
+                  <th width="30%"> Reports To</th>
+                  <th width="30%"> Office Extn</th>
+                  <th width="30%"> Office Code</th>
+                  <th width="30%"> Department</th>
                 </tr>
               </thead>
               <tbody>
@@ -27,6 +32,11 @@
 		  <td> {{ employee.employeeNumber }} </td>
 		  <td> {{ employee.first_name }} {{ employee.last_name }} </td>
 		  <td> {{ employee.email }} </td>
+		  <td> {{ employee.jobTitle}} </td>
+		  <td> {{ employee.reportsTo}} </td>
+		  <td> {{ employee.extension}} </td>
+		  <td> {{ employee.officeCode}} </td>
+		  <td> {{ employee.group}} </td>
 		</tr>
               {% endfor %}
               </tbody>

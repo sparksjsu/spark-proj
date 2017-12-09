@@ -25,6 +25,10 @@
                 <li><a href="{{ url_for('home.homepage') }}">Home</a></li>
                 <li><a href="{{ url_for('home.view_employees') }}">Employees</a></li>
                 <li><a href="{{ url_for('home.view_customers') }}">Customers</a></li>
+                <li><a href="{{ url_for('home.view_products') }}">Products</a></li>
+                <li><a href="{{ url_for('home.view_offices') }}">Offices</a></li>
+                <li><a href="{{ url_for('home.view_orders') }}">Orders</a></li>
+                <li><a href="{{ url_for('home.view_payments') }}">Payments</a></li>
 		{% if current_user.is_authenticated %}
 		<li><a href="{{ url_for('auth.logout')}}">Logout</a></li>
 		{% else %}

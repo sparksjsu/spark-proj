@@ -1,11 +1,11 @@
 #app/home/views.py
 
-from flask import render_template
+from flask import render_template, request
 from flask_login import login_required, current_user
 
 from . import home
 from .. import db
-from ..models import Employee, Customer
+from ..models import Employee, Customer, Office, Order, Orderdetails, Product, Payment
 
 @home.route('/')
 @login_required
@@ -19,9 +19,6 @@ def homepage():
 @home.route('/employees')
 @login_required
 def view_employees():
-    # prevent non-admins from accessing the page
-    #if not current_user.is_admin:
-    #    abort(403)
     employees = Employee.query.all()
     print('mahesh3')
     print(employees)
@@ -34,16 +31,75 @@ def view_employees():
 @login_required
 def view_customers():
     global current_employee
-    # prevent non-admins from accessing the page
-    #if not current_user.is_admin:
-    #    abort(403)
-    customers = Customer.query.all()
     if  not current_user.is_admin and current_user.group != 'sales':
 	return render_template('home/no_permission.html', 
 	    title="Dashboard::Permission-Denied")
 	
-    print(current_user.group)
-    print('mahesh3')
+    customers = Customer.query.all()
     return render_template('home/customers.html', 
 	customers=customers, title="Dashboard::Customers")
+  
+# add product view
+@home.route('/products')
+@login_required
+def view_products():
+    products = Product.query.all()
+    return render_template('home/products.html', 
+	products=products, title="Dashboard::Products")
+  
+# add office view
+@home.route('/offices')
+@login_required
+def view_offices():
+    offices = Office.query.all()
+    return render_template('home/offices.html', 
+	offices=offices, title="Dashboard::Offices")
+  
+# add oerder view
+@home.route('/orders')
+@login_required
+def view_orders():
+    global current_employee
+    if (not current_user.is_admin and 
+	current_user.group != 'finance' and
+	current_user.group != 'sales') :
+	return render_template('home/no_permission.html', 
+	    title="Dashboard::Permission-Denied")
+
+    orders = Order.query.all()
+    return render_template('home/orders.html', 
+	orders=orders, title="Dashboard::Orders")
+  
+# add oerder view 
+@home.route('/orderDetails')
+@login_required
+def view_order_details():
+    global current_employee
+    if (not current_user.is_admin and 
+	current_user.group != 'finance' and
+	current_user.group != 'sales') :
+	return render_template('home/no_permission.html', 
+	    title="Dashboard::Permission-Denied")
+
+    orderNumber = int(request.args.get('orderNumber'))
+    print(orderNumber)
+    orderdetails = Orderdetails.query.get(orderNumber)
+    print(orderdetails)
+    return render_template('home/order_details.html', 
+	orderdetails=orderdetails, title="Dashboard::Order Details %d"%(orderNumber))
+
+# add payment view
+@home.route('/payments')
+@login_required
+def view_payments():
+    global current_employee
+    if (not current_user.is_admin and 
+	current_user.group != 'finance' and
+	current_user.group != 'sales') :
+	return render_template('home/no_permission.html', 
+	    title="Dashboard::Permission-Denied")
+
+    payments = Payment.query.all()
+    return render_template('home/payments.html', 
+	payments=payments, title="Dashboard::Payments")
   

@@ -4,7 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from my_app import db, login_manager
 
-class offices(db.Model):
+class Office(db.Model):
 
 
     """create offices table """
@@ -106,7 +106,7 @@ class Productlines(db.Model):
     image = db.Column(db.String(50))
 
 
-class Products(db.Model):
+class Product(db.Model):
 
     """create products table """
 
@@ -124,7 +124,7 @@ class Products(db.Model):
     MSRP = db.Column(db.Float, nullable = False)
    
 
-class Payments(db.Model):
+class Payment(db.Model):
 
 
     """create payment table """
@@ -151,33 +151,19 @@ class Orderdetails(db.Model):
     priceEach = db.Column(db.Float, nullable = False)
     orderLineNumber = db.Column(db.Integer, nullable = False)
 
-#class User():
-#    #id = db.Column(db.Integer, primary_key=True)
-#    #username = db.Column(db.String(100))
-#    username = None
-#    conn = None
-#    def __init__(self, username, password):
-#        self.username = username
-#
-#    def get_ldap_connection(self):
-#	self.conn = ldap.initialize('ldap://ldap')
-#
-#    def try_login(self, username, password):
-#        self.get_ldap_connection()
-#        self.conn.simple_bind_s(
-#            'cn=admin,dc=ldap', password)
-#
-#    def is_authenticated(self):
-#        return True
-#
-#    def is_active(self):
-#        return True
-#
-#    def is_anonymous(self):
-#        return False
-#
-#    def get_id(self):
-#        return unicode(self.id)
+class Order(db.Model):
+
+    """create order table """
+
+    __tablename__ = 'orders'
+
+
+    orderNumber = db.Column(db.Integer, primary_key=True)
+    orderDate= db.Column(db.String(15), nullable = True)
+    requiredDate = db.Column(db.String(15), nullable = True)
+    status = db.Column(db.String(15), nullable = True)
+    comments = db.Column(db.String(100), nullable = True)
+    customerNumbers = db.Column(db.Integer, nullable = False)
 
 @login_manager.user_loader
 def load_user(id):
