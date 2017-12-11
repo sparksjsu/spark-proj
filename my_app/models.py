@@ -160,7 +160,7 @@ class Order(db.Model):
 
     orderNumber = db.Column(db.Integer, primary_key=True)
     orderDate= db.Column(db.String(15), nullable = True)
-    requiredDate = db.Column(db.String(15), nullable = True)
+    requriedDate = db.Column(db.String(15), nullable = True)
     status = db.Column(db.String(15), nullable = True)
     comments = db.Column(db.String(100), nullable = True)
     customerNumbers = db.Column(db.Integer, nullable = False)
