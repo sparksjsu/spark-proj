@@ -5,7 +5,7 @@ from flask_login import login_required, current_user
 
 from . import home
 from .. import db
-from ..models import Employee, Customer, Office, Order, Orderdetails, Product, Payment
+from ..models import Employee, Customer, Office, Order, Orderdetails, Product, Payment, Productlines
 
 @home.route('/')
 @login_required
@@ -46,6 +46,14 @@ def view_products():
     products = Product.query.all()
     return render_template('home/products.html', 
 	products=products, title="Dashboard::Products")
+
+# add productlines view
+@home.route('/productlines')
+@login_required
+def view_productlines():
+    productlines = Productlines.query.all()
+    return render_template('home/productlines.html', 
+	productlines=productlines, title="Dashboard::Productlines")
   
 # add office view
 @home.route('/offices')
